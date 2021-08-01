@@ -36,7 +36,12 @@ public class Topic_01_Check_Environment {
 	public void TC_03_LoginFormDisplayed() {
 
 	}
+	@Test
+	public void TC_04_Test_Push_Code() {
 
+	}
+	
+	
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
