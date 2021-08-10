@@ -15,7 +15,7 @@ public class Topic_01_Check_Environment {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", ".\\browserDrivers\\geckodriver.exe");
+		//System.setProperty("webdriver.gecko.driver", ".\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
