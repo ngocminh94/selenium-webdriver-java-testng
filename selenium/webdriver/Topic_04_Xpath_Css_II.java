@@ -26,7 +26,7 @@ public class Topic_04_Xpath_Css_II {
 	By phoneTextboxBy = By.id("txtPhone");
 	By registerButtonBy = By.xpath("//form[@id='frmLogin']//button");
 
-	// Error:
+	// Error message:
 	By nameErrorMsgBy = By.id("txtFirstname-error");
 	By emailErrorMsgBy = By.id("txtEmail-error");
 	By confirmEmailErrorMsgBy = By.id("txtCEmail-error");
