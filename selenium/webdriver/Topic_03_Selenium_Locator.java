@@ -29,23 +29,23 @@ public class Topic_03_Selenium_Locator {
 	}
 
 	
-	
+	@Test
 	public void TC_01_FindElement() {
 
 		// Single element --> WebElement
-		// driver.findElement(By.className("")).click(); // -> action trực tiếp lên
+		 driver.findElement(By.className("")).click(); // -> action trực tiếp lên
 		// element, ko lưu
 
-		//WebElement loginButton = driver.findElement(By.className("")); // -> lưu element trước
-		//loginButton.click(); // -> sau đó mới action lên
+		WebElement loginButton = driver.findElement(By.className("")); // -> lưu element trước
+		loginButton.click(); // -> sau đó mới action lên
 
 		// findElement: tìm element
 		// By.xxx: vs locator nào
 		// action gì lên element đó: click, getText, sendkey,...
 
 		// Multiple element --> List<WebElement>
-		//List<WebElement> buttons = driver.findElements(By.className("")); // -> lưu trước
-		//buttons.get(0).click(); // -> sau đó mới action lên
+		List<WebElement> buttons = driver.findElements(By.className("")); // -> lưu trước
+		buttons.get(0).click(); // -> sau đó mới action lên
 	}
 
 	

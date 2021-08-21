@@ -24,7 +24,7 @@ public class Topic_04_Xpath_Css_I {
 
 	@Test
 	public void TC_01_Login_Empty_Email_And_Password() {
-		// nhap du lieu vao textbox
+		// nhap du lieu vao textbox:
 		driver.findElement(By.id("email")).sendKeys("");
 		driver.findElement(By.name("login[password]")).sendKeys("");
 
