@@ -1,22 +1,22 @@
 package webdriver;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class Topic_04_Xpath_Css_I {
 	WebDriver driver;
+	String projectPath = System.getProperty("user.dir");
 
 	@BeforeClass
 	public void beforeClass() {
+		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS); // mục đích là để chờ cho element đc render ra trước khi thao tác
 		driver.get("http://live.demoguru99.com/index.php/customer/account/login/");

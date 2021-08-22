@@ -3,11 +3,11 @@ package webdriver;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -15,10 +15,12 @@ import org.testng.annotations.Test;
 public class Topic_03_Selenium_Locator {
 	// khai báo biến "driver" đại diện cho Selenium WebDriver
 	WebDriver driver;
+	String projectPath = System.getProperty("user.dir");
 
 	@BeforeClass
 	public void beforeClass() {
 		// Mở trình duyệt Firefox lên
+		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 
 		// Set timeout để tìm element
@@ -29,7 +31,7 @@ public class Topic_03_Selenium_Locator {
 	}
 
 	
-	@Test
+	// @Test
 	public void TC_01_FindElement() {
 
 		// Single element --> WebElement
@@ -49,7 +51,6 @@ public class Topic_03_Selenium_Locator {
 	}
 
 	
-	
 	public void TC_02_ID() {
 		// Selenium Locator
 		driver.findElement(By.id("send2")).click();
@@ -60,15 +61,13 @@ public class Topic_03_Selenium_Locator {
 
 	
 	
-	
 	public void TC_03_Class() {
 		// driver.navigate().refresh();
 		driver.findElement(By.className("validate-password")).sendKeys("123456789");
 	}
 
 	
-	
-	
+	@Test
 	public void TC_04_Name() {
 		driver.navigate().refresh();
 		driver.findElement(By.name("send")).click();
@@ -77,8 +76,6 @@ public class Topic_03_Selenium_Locator {
 		Assert.assertTrue(driver.findElement(By.id("advice-required-entry-email")).isDisplayed());
 	}
 
-	
-	
 	
 	public void TC_05_Tagname() {
 		// Hiển thị hết tất cả đường link ở màn hình này, sau đó getText ra
@@ -90,8 +87,6 @@ public class Topic_03_Selenium_Locator {
 	}
 
 	
-	
-	
 	public void TC_06_LinkText() {
 		driver.navigate().refresh();
 		driver.findElement(By.linkText("Forgot Your Password?")).click();
@@ -99,7 +94,6 @@ public class Topic_03_Selenium_Locator {
 		Assert.assertTrue(driver.findElement(By.id("email_address")).isDisplayed());
 	}
 
-	
 	
 	
 	public void TC_07_PartialLinkText() {
@@ -130,6 +124,6 @@ public class Topic_03_Selenium_Locator {
 	
 	@AfterClass
 	public void afterClass() {
-		// driver.quit();
+		driver.quit();
 	}
 }
