@@ -152,18 +152,17 @@ public class Topic_08_Custom_Dropdown_List {
 		driver.get(
 				"https://ej2.syncfusion.com/angular/demos/?_ga=2.262049992.437420821.1575083417-524628264.1575083417#/material/drop-down-list/data-binding");
 
-		selectItemInDropdown(By.cssSelector("span[aria-owns='games_options']"), By.cssSelector("ul#games_options>li"),
-				"Basketball");
+		By parent = By.cssSelector("span[aria-owns='games_options']");
+		By child = By.cssSelector("ul#games_options>li");
+		
+		selectItemInDropdown(parent, child, "Basketball");
 		sleepInSecond(3);
-		Assert.assertEquals(
-				driver.findElement(By.cssSelector("span[aria-owns='games_options']>input")).getAttribute("aria-label"),
+		Assert.assertEquals(driver.findElement(By.cssSelector("span[aria-owns='games_options']>input")).getAttribute("aria-label"),
 				"Basketball");
 
-		selectItemInDropdown(By.cssSelector("span[aria-owns='games_options']"), By.cssSelector("ul#games_options>li"),
-				"Football");
+		selectItemInDropdown(parent, child, "Football");
 		sleepInSecond(3);
-		Assert.assertEquals(
-				driver.findElement(By.cssSelector("span[aria-owns='games_options']>input")).getAttribute("aria-label"),
+		Assert.assertEquals(driver.findElement(By.cssSelector("span[aria-owns='games_options']>input")).getAttribute("aria-label"),
 				"Football");
 
 	}
