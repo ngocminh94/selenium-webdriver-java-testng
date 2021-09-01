@@ -41,6 +41,7 @@ public class Topic_08_Custom_Dropdown_List {
 
 		// Wait để tìm element (apply for findElement/findElements)
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 	}
 
 	@Test
