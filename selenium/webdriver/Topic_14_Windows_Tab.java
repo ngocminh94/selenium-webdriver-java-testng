@@ -3,17 +3,23 @@ package webdriver;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class Topic_14_Windows_Tab {
 	WebDriver driver;
+	Alert alert;
 	WebDriverWait explicitWait;
+	JavascriptExecutor jsExecutor;
 	String childID;
 	String projectPath = System.getProperty("user.dir");
 
@@ -21,12 +27,16 @@ public class Topic_14_Windows_Tab {
 	public void beforeClass() {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
+		
+		explicitWait = new WebDriverWait(driver, 15);
+
+		jsExecutor = (JavascriptExecutor) driver;
+
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
 		driver.manage().window().maximize();
 	}
 
-	@Test
 	public void TC_01_Windows() {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
 
@@ -66,26 +76,81 @@ public class Topic_14_Windows_Tab {
 		switchToWindowByTitle("LAZADA Vietnam™ - Mua Hàng Trực Tuyến Giá Tốt");
 
 		closeAllWindowsWithoutParent(parentID);
-		
+
 		driver.findElement(By.id("email")).sendKeys("min@gmail.com");
 		driver.findElement(By.id("password")).sendKeys("123456");
 		driver.findElement(By.xpath("//button[text()='Submit']")).click();
-		
+
 	}
 
-	@Test
-	public void TC_02_() {
+	public void TC_02_Tabs() {
+		driver.get("https://kyna.vn/");
+
+		driver.findElement(By.xpath("//a[@title='Close']")).click();
+		sleepInSecond(2);
+
+		scrollToBottomPage();
+		driver.findElement(By.xpath("//div[@id='k-footer']//img[@alt='facebook']")).click();
+
+		switchToWindowByTitle("Kyna.vn - Trang chủ | Facebook");
+		Assert.assertTrue(driver.findElement(By.xpath("//u[text()='Facebook']")).isDisplayed());
+
+		switchToWindowByTitle("Kyna.vn - Học online cùng chuyên gia");
+		driver.findElement(By.cssSelector("input#live-search-bar")).sendKeys("selenium");
+
+		String parentID = driver.getWindowHandle();
+		closeAllWindowsWithoutParent(parentID);
 
 	}
 
 	@Test
 	public void TC_03_() {
+		driver.get("http://live.demoguru99.com/index.php/");
+
+		driver.findElement(By.xpath("//a[text()='Mobile']")).click();
+		driver.findElement(By.xpath(
+				"//a[text()='Sony Xperia']/parent::h2/following-sibling::div[@class='actions']//a[text()='Add to Compare']"))
+				.click();
+
+		Assert.assertTrue(driver
+				.findElement(By.xpath("//span[text()='The product Sony Xperia has been added to comparison list.']"))
+				.isDisplayed());
+		
+		driver.findElement(By.xpath(
+				"//a[text()='Samsung Galaxy']/parent::h2/following-sibling::div[@class='actions']//a[text()='Add to Compare']"))
+				.click();
+		
+		Assert.assertTrue(driver
+				.findElement(By.xpath("//span[text()='The product Samsung Galaxy has been added to comparison list.']"))
+				.isDisplayed());
+		
+		driver.findElement(By.xpath("//button//span[text()='Compare']")).click();
+		
+		switchToWindowByTitle("Products Comparison List - Magento Commerce");
+		
+		driver.close();
+		
+		switchToWindowByTitle("Mobile");	
+		
+		driver.findElement(By.xpath("//a[text()='Clear All']")).click();
+		sleepInSecond(2);
+		
+		alert = explicitWait.until(ExpectedConditions.alertIsPresent());
+		alert.accept();
+		
+		Assert.assertTrue(driver
+				.findElement(By.xpath("//span[text()='The comparison list was cleared.']"))
+				.isDisplayed());
 
 	}
 
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
+	}
+
+	public void scrollToBottomPage() {
+		jsExecutor.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 	}
 
 	// Dùng cho duy nhất 2 window/ tab
@@ -137,7 +202,7 @@ public class Topic_14_Windows_Tab {
 				driver.close();
 			}
 		}
-		// Switch về parent 
+		// Switch về parent
 		driver.switchTo().window(parentID);
 	}
 
