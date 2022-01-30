@@ -47,7 +47,6 @@ public class Topic_17_Wait_VIII_Page_Loading {
 		System.out.println("Start time = " + new Date().toString());
 		Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='OrangeHRM REST API Documentation']")).isDisplayed());
 		System.out.println("End time = " + new Date().toString());
-
 	}
 
 	public boolean isJQueryLoadedSuccess(WebDriver driver) {
